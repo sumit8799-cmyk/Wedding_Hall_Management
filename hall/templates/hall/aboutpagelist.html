@@ -1,0 +1,93 @@
+{% include 'hall/header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>About</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">Home</a></li>
+              <li class="breadcrumb-item active">About</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex align-items-center">
+                  <h3 class="card-title m-0">About List</h3>
+                
+                  <a href="{% url 'aboutpage' %}" class="btn btn-primary ml-auto">Add</a>
+                </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Background Image</th>
+                    <th>First Image</th>
+                    <th>Heading</th>
+                    <th>Description</th>
+                    <th>Second Image</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for about in aboutpage %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                      <td>{% if about.BackgroundImage %}<img src="{{ about.BackgroundImage.url }}" alt="Background Image" width="100">{% endif %}</td>
+                      <td>{% if about.FirstImage %}<img src="{{ about.FirstImage.url }}" alt="First Image" width="100">{% endif %}</td>
+                      <td>{{ about.Heading }}</td>
+                      <td>{{ about.Description }}</td>
+                      <td>{% if about.SecondImage %}<img src="{{ about.SecondImage.url }}" alt="Second Image" width="100">{% endif %}</td>
+
+                    <td>
+                        <a class="btn btn-info btn-sm" href="{% url 'aboutpageUpdate' about.id %}"><i class="fas fa-pencil-alt"></i></a>
+                          <form method="post" action="{% url 'aboutpageDelete' about.id %}" class="d-inline" onsubmit="return confirm('Delete this About page record?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                          </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Background Image</th>
+                    <th>First Image</th>
+                    <th>Heading</th>
+                    <th>Description</th>
+                    <th>Second Image</th>
+                    <th>Action</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% include 'hall/footer.html' %}

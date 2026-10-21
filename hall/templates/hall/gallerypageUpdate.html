@@ -1,0 +1,133 @@
+{% include 'hall/header.html' %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6 d-flex justify-content-between align-items-center">
+          <h1 class="m-0">Gallery</h1>
+          <a href="{% url 'gallerypagelist' %}" class="btn btn-primary">List</a>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">Gallery</a></li>
+            <li class="breadcrumb-item active">Update</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Gallery Update</h3>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+             
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="bgimg">Background Image</label>
+                  {% if gallery.BackgroundImage %}
+                    <div class="mb-2">
+                      <img src="{{ gallery.BackgroundImage.url }}" alt="Current background image" width="140">
+                      <div>{{ gallery.BackgroundImage.name }}</div>
+                    </div>
+                  {% endif %}
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="bgimg" name="bgimg" accept="image/*">
+                      <label class="custom-file-label" for="bgimg">Choose Background Image</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="oneImage">One Image</label>
+                  {% if gallery.oneImage %}
+                    <div class="mb-2">
+                      <img src="{{ gallery.oneImage.url }}" alt="Current gallery image one" width="140">
+                     <div>{{ gallery.oneImage.name }}</div>
+                    </div>
+                  {% endif %}
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="oneImage" name="oneImage" accept="image/*">
+                      <label class="custom-file-label" for="oneImage">Choose One Image </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="secondImage">Two Image</label>
+                  {% if gallery.secondImage %}
+                    <div class="mb-2">
+                      <img src="{{ gallery.secondImage.url }}" alt="Current gallery image two" width="140">
+                      <div>{{ gallery.secondImage.name }}</div>
+                    </div>
+                  {% endif %}
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="secondImage" name="secondImage" accept="image/*">
+                      <label class="custom-file-label" for="secondImage">Choose Two Image </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="thirdImage">Three Image</label>
+                  {% if gallery.thirdImage %}
+                    <div class="mb-2">
+                      <img src="{{ gallery.thirdImage.url }}" alt="Current gallery image three" width="140">
+                      <div>{{ gallery.thirdImage.name }}</div>
+                    </div>
+                  {% endif %}
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="thirdImage" name="thirdImage" accept="image/*">
+                      <label class="custom-file-label" for="thirdImage">Choose Three Image </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="fourthImage">Four Image</label>
+                  {% if gallery.fourthImage %}
+                    <div class="mb-2">
+                      <img src="{{ gallery.fourthImage.url }}" alt="Current gallery image four" width="140">
+                      <div>{{ gallery.fourthImage.name }}</div>
+                    </div>
+                  {% endif %}
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="fourthImage" name="fourthImage" accept="image/*">
+                      <label class="custom-file-label" for="fourthImage">Choose Four Image </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.querySelectorAll('.custom-file-input').forEach(function (input) {
+    input.addEventListener('change', function () {
+      this.nextElementSibling.textContent = this.files.length
+        ? this.files[0].name
+        : 'Choose new image (optional)';
+    });
+  });
+</script>
+{% include 'hall/footer.html' %}

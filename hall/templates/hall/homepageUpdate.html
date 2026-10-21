@@ -1,0 +1,211 @@
+{% include 'hall/header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6 d-flex justify-content-between align-items-center">
+              <h1 class="m-0">Home</h1>
+              <a href="{% url 'homepagelist' %}">
+                <button class="btn btn-primary">List</button>
+              </a>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">Home</a></li>
+              <li class="breadcrumb-item active">Home</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Home Update</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post" enctype="multipart/form-data" onsubmit="return validate()">
+                {% csrf_token %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                  {% endfor %}
+                {% endif %}
+
+    <div class="card-body">
+
+        <!-- Logo -->
+        <div class="form-group">
+            <label>Logo</label>
+            {% if homepage.logo %}
+              <div class="mb-2"><img src="{{ homepage.logo.url }}" alt="Current logo" style="max-width: 140px; max-height: 90px; object-fit: contain;"></div>
+            {% endif %}
+            <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="logo" name="logo" accept="image/*">
+                  <label class="custom-file-label" for="logo">Choose new logo (optional)</label></div>
+            </div>
+        </div>
+
+        <!-- Background Image -->
+        <div class="form-group">
+            <label>Image</label>
+            {% if homepage.image %}
+              <div class="mb-2"><img src="{{ homepage.image.url }}" alt="Current background image" style="max-width: 180px; max-height: 100px; object-fit: cover;"></div>
+            {% endif %}
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="img" name="image" accept="image/*">
+                    <label class="custom-file-label" for="img">Choose new background image (optional)</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- First Heading -->
+        <div class="form-group">
+            <label>Heading</label>
+            <input type="text" class="form-control" id="head" name="heading" value="{{ homepage.heading }}" placeholder="Enter Heading" onkeypress="return /[A-Za-z ]/.test(event.key)">
+        </div>
+
+        <!-- First Paragraph -->
+        <div class="form-group">
+            <label>Paragraph</label>
+            <textarea class="form-control" rows="3" placeholder="Enter Paragraph" id="par" name="description">{{ homepage.description }}</textarea>
+        </div>
+
+        <!-- Second Heading -->
+        <div class="form-group">
+            <label>Second Heading</label>
+            <input type="text" class="form-control" id="he" name="secondHeading" value="{{ homepage.secondHeading }}" placeholder="Enter Heading" onkeypress="return /[A-Za-z ]/.test(event.key)">
+        </div>
+
+        <!-- Second Paragraph -->
+        <div class="form-group">
+            <label>Second Paragraph</label>
+            <textarea class="form-control" rows="3" placeholder="Enter Paragraph" id="pa" name="secondDescription">{{ homepage.secondDescription }}</textarea>
+        </div>
+
+        <!-- Third Heading -->
+        <div class="form-group">
+            <label>Third Heading</label>
+            <input type="text" class="form-control" id="heading" name="thirdHeading" value="{{ homepage.thirdHeading }}" placeholder="Enter Heading" onkeypress="return /[A-Za-z ]/.test(event.key)">
+        </div>
+
+        <!-- Third Paragraph -->
+        <div class="form-group">
+            <label>Third Paragraph</label>
+            <textarea class="form-control" rows="3" placeholder="Enter Paragraph" id="Paragra" name="thirdDescription">{{ homepage.thirdDescription }}</textarea>
+        </div>
+      </div>
+                <!-- /.card-body -->
+                  <!-- Footer -->
+                  <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
+
+                </form>
+            </div>
+
+
+            <!-- Java  Script Add Function Call -->
+              <script>
+                  document.querySelectorAll('.custom-file-input').forEach(function (input) {
+                    input.addEventListener('change', function () {
+                      var label = this.nextElementSibling;
+                      label.textContent = this.files.length
+                        ? this.files[0].name
+                        : (this.id === 'logo' ? 'Choose new logo (optional)' : 'Choose new background image (optional)');
+                    });
+                  });
+
+                  function validate()
+                  {
+                    var head = document.getElementById('head').value;
+                      if(head == '')
+                      {
+                        alert("Plase Enter Headding")
+                        return false
+                      }
+
+                       var par = document.getElementById('par').value;
+                      if(par == '')
+                      {
+                        alert("Plase Enter Paragraph")
+                        return false
+                      }
+
+
+                      // Second SECOND PARAGRAPH PROSSECE IN PROJECT USE
+
+                       var he = document.getElementById('he').value;
+                      if(he == '')
+                      {
+                        alert("Plase Enter Second Headding")
+                        return false
+                      }
+
+                       var pa = document.getElementById('pa').value;
+                      if(pa == '')
+                      {
+                        alert("Plase Enter Second Paragraph")
+                        return false
+                      }
+
+                      // <!-- THIRD PARAGRAPH PROSSECE IN PROJECT USE  -->
+
+                        var heading = document.getElementById('heading').value;
+                      if(heading == '')
+                      {
+                        alert("Plase Enter Third Headding")
+                        return false
+                      }
+
+                       var Paragra = document.getElementById('Paragra').value;
+                      if(Paragra == '')
+                      {
+                        alert("Plase Enter Third Paragraph")
+                        return false
+                      }
+                    alert("Form submitted successfully!");
+                        return true;
+                  } 
+	              </script>
+
+
+
+
+            <!-- /.card -->
+
+            <!-- general form elements -->
+           
+            <!-- /.card -->
+
+            
+            <!-- /.card -->
+            
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include 'hall/footer.html' %}

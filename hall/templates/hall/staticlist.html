@@ -1,0 +1,91 @@
+{% include 'hall/header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Counter Section </h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">Home</a></li>
+              <li class="breadcrumb-item active">Counter Section </li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex align-items-center">
+                  <h3 class="card-title m-0">Counter Section  List</h3>
+                
+                  <a href="{% url 'staticadd' %}" class="btn btn-primary ml-auto">Add</a>
+                </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Number of Wedding</th>
+                    <th>Number of Birthday Party</th>
+                    <th>Number of Farewell</th>
+                    <th>Number of Seminar</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for static in statics %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ static.NumberOfWedding }}</td>
+                    <td>{{ static.NumberOfBirthday }}</td>
+                    <td>{{ static.NumberOfFerewell }}</td>
+                    <td>{{ static.NumberOfSeminar }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="{% url 'staticUpdate' static.id %}" aria-label="Edit counter record"><i class="fas fa-pencil-alt"></i></a>
+                        <form method="post" action="{% url 'staticDelete' static.id %}" class="d-inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger btn-sm" aria-label="Delete counter record"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr><td colspan="6" class="text-center">No counter section records have been added.</td></tr>
+                  {% endfor %}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Number of Wedding</th>
+                    <th>Number of Birthday Party</th>
+                    <th>Number of Farewell</th>
+                    <th>Number of Seminar</th>
+                    <th>Action</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include 'hall/footer.html' %}

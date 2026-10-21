@@ -1,0 +1,201 @@
+{% include 'hall/header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6 d-flex justify-content-between align-items-center">
+              <h1 class="m-0">About</h1>
+              <a href="{% url 'aboutpagelist' %}">
+                <button class="btn btn-primary">List</button>
+              </a>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">About</a></li>
+              <li class="breadcrumb-item active">Home</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">About Add Info</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post" enctype="multipart/form-data" onsubmit="return validate()">
+                {% csrf_token %}
+                <div class="card-body">
+                      
+                  <!-- Background image -->
+                    <div class="form-group">
+                          <label for="exampleInputtext1">Background Image</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="bgimg" name="bgimg">
+                                <label class="custom-file-label" for="bgimg">Choose background image</label>
+                            </div>
+                          </div> 
+                    </div>
+
+                    <div class="form-group">
+                          <label for="exampleInputtext1">First Image</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fimg" name="fgimg" >
+                                <label class="custom-file-label" for="fimg">Choose first image</label>
+                            </div>
+                          </div> 
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputtext1">Heading</label>
+                        <input type="Text" class="form-control" id="head" name="heading" placeholder="Enter Heading"onkeypress="return /[A-Za-z ]/.test(event.key)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Caption</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter Caption" id="cap" name="caption"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                          <label for="exampleInputtext1">Second Image</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="simg" name="simg" >
+                                <label class="custom-file-label" for="simg">Choose second image</label>
+                            </div>
+                          </div> 
+                    </div>
+                  </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              
+            </div>
+
+
+            <!-- Java  Script Add Function Call -->
+              <script>
+                  document.querySelectorAll('.custom-file-input').forEach(function (input) {
+                    input.addEventListener('change', function () {
+                      var label = this.nextElementSibling;
+                      if (this.files.length) {
+                        label.textContent = this.files[0].name;
+                      }
+                    });
+                  });
+
+                  function validate()
+                  {
+                    var bgimg = document.getElementById('bgimg').value;
+                      if(bgimg == '')
+                      {
+                        alert("Plase Enter Background Image")
+                        return false
+                      }
+
+                    var fimg = document.getElementById('fimg').value;
+                      if(fimg == '')
+                      {
+                        alert("Plase Enter First Image")
+                        return false
+                      }
+                      
+                    var head = document.getElementById('head').value;
+                      if(head == '')
+                      {
+                        alert("Plase Enter Headding")
+                        return false
+                      }
+
+                       var cap = document.getElementById('cap').value;
+                      if(cap == '')
+                      {
+                        alert("Plase Enter Caption")
+                        return false
+                      }
+
+                      var simg = document.getElementById('simg').value;
+                      if(simg == '')
+                      {
+                        alert("Plase Enter Second  Image")
+                        return false
+                      }
+                      // Second SECOND PARAGRAPH PROSSECE IN PROJECT USE
+
+                       var he = document.getElementById('he').value;
+                      if(he == '')
+                      {
+                        alert("Plase Enter Second Headding")
+                        return false
+                      }
+
+                       var pa = document.getElementById('pa').value;
+                      if(pa == '')
+                      {
+                        alert("Plase Enter Second Paragraph")
+                        return false
+                      }
+
+                      // <!-- THIRD PARAGRAPH PROSSECE IN PROJECT USE  -->
+
+                        var heading = document.getElementById('heading').value;
+                      if(heading == '')
+                      {
+                        alert("Plase Enter Third Headding")
+                        return false
+                      }
+
+                      var Paragra = document.getElementById('Paragra').value;
+                      if(Paragra == '')
+                      {
+                        alert("Plase Enter Third Paragraph")
+                        return false
+                      }
+                    // alert("Form submitted successfully!");
+                    //     return true;
+                  } 
+	              </script>
+
+
+
+
+            <!-- /.card -->
+
+            <!-- general form elements -->
+           
+            <!-- /.card -->
+
+            
+            <!-- /.card -->
+            
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include 'hall/footer.html' %}

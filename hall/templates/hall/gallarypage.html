@@ -1,0 +1,134 @@
+{% include 'hall/header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6 d-flex justify-content-between align-items-center">
+              <h1 class="m-0">Gallery</h1>
+              <a href="{% url 'gallerypagelist' %}">
+                <button class="btn btn-primary">List</button>
+              </a>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">Gallery</a></li>
+              <li class="breadcrumb-item active">Home</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Gallery Add Image's</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-body">
+                      
+                  <!-- Background image -->
+                    <div class="form-group">
+                          <label for="exampleInputtext1">Background Image</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="bgimg" name="bgimg" required>
+                                <label class="custom-file-label" for="bgimg">Choose file</label>
+                            </div>
+                          </div> 
+                    </div>
+
+                    <div class="form-group">
+                          <label for="exampleInputtext1">One Image's</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="oneImage" name="oneImage" required>
+                                <label class="custom-file-label" for="oneImage">Choose file</label>
+                            </div>
+                          </div> 
+                    </div>
+
+                     <div class="form-group">
+                          <label for="exampleInputtext1">Two Image's</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="secondImage" name="secondImage" required>
+                                <label class="custom-file-label" for="secondImage">Choose file</label>
+                            </div>
+                          </div> 
+                    </div>
+
+                     <div class="form-group">
+                          <label for="exampleInputtext1">Three Image's</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="thirdImage" name="thirdImage" required>
+                                <label class="custom-file-label" for="thirdImage">Choose file</label>
+                            </div>
+                          </div> 
+                    </div>
+
+                     <div class="form-group">
+                          <label for="exampleInputtext1">Four Image's</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fourthImage" name="fourthImage" required>
+                                <label class="custom-file-label" for="fourthImage">Choose file</label>
+                            </div>
+                          </div> 
+                    </div>
+                  </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+
+
+            <!-- /.card -->
+
+            <!-- general form elements -->
+           
+            <!-- /.card -->
+
+            
+            <!-- /.card -->
+            
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <script>
+    document.querySelectorAll('.custom-file-input').forEach(function (input) {
+      input.addEventListener('change', function () {
+        this.nextElementSibling.textContent = this.files.length
+          ? this.files[0].name
+          : 'Choose file';
+      });
+    });
+  </script>
+  {% include 'hall/footer.html' %}

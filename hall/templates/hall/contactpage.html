@@ -1,0 +1,149 @@
+{% include 'hall/header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6 d-flex justify-content-between align-items-center">
+              <h1 class="m-0">Contact </h1>
+              <a href="{% url 'contactpagelist' %}">
+                <button class="btn btn-primary">List</button>
+              </a>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">Contact </a></li>
+              <li class="breadcrumb-item active">Home</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Contact Add Info</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post" enctype="multipart/form-data" onsubmit="return validate()">
+                {% csrf_token %}
+                <div class="card-body">
+                      
+                  <!-- Background image -->
+                    <div class="form-group">
+                          <label for="exampleInputtext1">Background Image</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="bgimg" name="bgimg" accept="image/*" required>
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            </div>
+                          </div> 
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address </label>
+                        <textarea class="form-control" rows="3" placeholder="Enter Address" id="add" name="address" required></textarea>
+                    </div>
+
+                     <div class="form-group">
+                        <label>Mobile Number </label>
+                        <input type="text" class="form-control" name="mobile" id="mob" placeholder="Enter Mobile Number" onkeypress="return onlyNumberKey(event)" required>
+                     </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="em" name="email" placeholder="Enter email" required>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+
+
+            <!-- Java  Script Add Function Call -->
+              <script>
+                  function validate()
+                  {
+                    var bgimg = document.getElementById('bgimg').value;
+                      if(bgimg == '')
+                      {
+                        alert("Plase Enter Background Image")
+                        return false
+                      }
+
+                    var add = document.getElementById('add').value;
+                      if(add == '')
+                      {
+                        alert("Plase Enter Address")
+                        return false
+                      }
+                      
+                      var mob = document.getElementById('mob').value;
+                        if(mob == '')
+                      {
+                        alert("Please Enter Mobile Number");
+                        return false;
+                      }
+                      if(mob != '') 
+                      {
+                        if(mob.length < 10)
+                        {
+                          alert("Please Enter 10 Digit Mobile Number");
+                          return false;
+                        }
+                      }
+                      var em = document.getElementById('em').value;
+                      if(em == '')
+                      {
+                        alert("please Enter Email Address");
+                        return false;
+                      }
+                    return true;
+                  } 
+                  function onlyNumberKey(evt)
+                  {
+                    return /^\d*?\d*$/.test(evt.target.value+evt.key);
+                  }
+	              </script>
+
+
+
+
+            <!-- /.card -->
+
+            <!-- general form elements -->
+           
+            <!-- /.card -->
+
+            
+            <!-- /.card -->
+            
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include 'hall/footer.html' %}

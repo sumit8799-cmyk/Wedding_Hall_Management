@@ -1,0 +1,66 @@
+{% include 'hall/header.html' %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6 d-flex justify-content-between align-items-center">
+          <h1 class="m-0">Counter Section</h1>
+          <a href="{% url 'staticlist' %}" class="btn btn-primary">List</a>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'dashbord' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'staticlist' %}">Counter Section</a></li>
+            <li class="breadcrumb-item active">Update</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Counter Section Update</h3>
+            </div>
+            <form method="post">
+              {% csrf_token %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="now">Number of Wedding</label>
+                  <input type="number" min="0" class="form-control" id="now" name="now" value="{{ counter.NumberOfWedding }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="bp">Number of Birthday Party</label>
+                  <input type="number" min="0" class="form-control" id="bp" name="nobp" value="{{ counter.NumberOfBirthday }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="nof">Number of Farewell</label>
+                  <input type="number" min="0" class="form-control" id="nof" name="nof" value="{{ counter.NumberOfFerewell }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="nos">Number of Seminar</label>
+                  <input type="number" min="0" class="form-control" id="nos" name="nos" value="{{ counter.NumberOfSeminar }}" required>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% include 'hall/footer.html' %}
