@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="{% static 'userside/assets/css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'userside/assets/css/nice-select.css' %}">
     <link rel="stylesheet" href="{% static 'userside/assets/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'userside/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
-
 </head>
 <body>
 <!-- Preloader Start -->
@@ -143,13 +141,26 @@
                     <div class="col-12">
                         <h2 class="contact-title">Get in Touch/Regitration</h2>
                     </div>
-                    <div id="flash-messages" style="display: none;">
-    {% if messages %}
-        {% for message in messages %}
-            <span data-category="{{ message.tags }}">{{ message }}</span>
-        {% endfor %}
-    {% endif %}
-</div>
+                    {% if messages %}
+                        <div class="col-12" aria-live="polite">
+                            {% for message in messages %}
+                                <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' or message.tags == 'danger' %}alert-danger{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if form_errors %}
+                        <div class="col-12" aria-live="polite">
+                            <div class="alert alert-danger" role="alert">
+                                <ul class="mb-0">
+                                    {% for error in form_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
                     <div class="col-lg-8">
                        
                         <form class="form-contact contact_form" action="{% url 'register' %}" method="post" id="contactForm">
@@ -194,21 +205,21 @@
                             <span class="contact-info__icon"><i class="ti-home"></i></span>
                             <div class="media-body">
                                 <h3>Address </h3>
-                                <p>{% for item in contact %}{{ item.Address }}{% endfor %}</p>
+                                <p>{{ contact.Address }}</p>
                             </div>
                         </div>
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                             <div class="media-body">
                                 <h3>Contact</h3>
-                                <p>{% for item in contact %}{{ item.MobeliNumbar }}{% endfor %}</p>
+                                <p>{{ contact.MobeliNumbar }}</p>
                             </div>
                         </div>
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-email"></i></span>
                             <div class="media-body">
                                 <h3>Send us your query anytime</h3>
-                                <p>{% for item in contact %}{{ item.EmailAddress }}{% endfor %}</p>
+                                <p>{{ contact.EmailAddress }}</p>
                             </div>
                         </div>
                     </div>
@@ -219,7 +230,7 @@
 </main>
 <footer>
     <!-- Footer Start-->
-    <div class="footer-main" data-background="assets/img/gallery/section_bg4.png">
+    <div class="footer-main" data-background="{% static 'userside/assets/img/gallery/section_bg4.png' %}">
         <div class="footer-area footer-padding">
             <div class="container">
                 <div class="row d-flex justify-content-between">
@@ -324,41 +335,5 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script src="{% static 'userside/assets/js/plugins.js' %}"></script>
     <script src="{% static 'userside/assets/js/main.js' %}"></script>
-    <script src="{% static 'userside/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
-
-    <script>
-    // SweetAlert Toast configuration
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-    });   
-
-    // Read flash messages from hidden div and show as SweetAlert toasts
-    document.addEventListener('DOMContentLoaded', function() {
-        const flashContainer = document.getElementById('flash-messages');
-        if (flashContainer) {
-            const messages = flashContainer.querySelectorAll('span');
-            messages.forEach(function(span) {
-                const category = span.getAttribute('data-category');
-                const message = span.textContent;
-                
-                if (category === 'success') {
-                    Toast.fire({
-                        icon: 'success',
-                        title: message
-                    });
-                } else if (category === 'error' || category === 'danger') {
-                    Toast.fire({
-                        icon: 'error',
-                        title: message
-                    });
-                }
-            });
-        }
-    });
-</script>
-    
 </body>
 </html>

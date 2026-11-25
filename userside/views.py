@@ -52,15 +52,7 @@ def gallery(request):
     )
 
 def _contact_context():
-    contact=[
-        {
-            "BackgroundImage": item.BackgroundImage.url if item.BackgroundImage else "",
-            "Address": item.Address,
-            "MobeliNumbar": item.MobeliNumbar,
-            "EmailAddress": item.EmailAddress,
-        }
-        for item in Contact.objects.all().order_by("-id")
-    ]
+    contact = Contact.objects.order_by("-id").first()
     return {'contact': contact}
 
 
